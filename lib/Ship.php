@@ -109,14 +109,14 @@ class Ship
         return $this->strength * $shipQuantity - $this->damage;
     }
 
-    public function damage(Ship $enemy, $enemyQuantity)
+    public function damage(Ship $enemy, $shipQuantity)
     {
-        $enemy->weaponPower * $enemyQuantity;
+        $enemy->damage += $this->weaponPower * $shipQuantity;
     }
 
-    public function canShipUseTheForce(Ship $ship): bool
+    public function canShipUseTheForce(): bool
     {
-        $jediHeroProbability = $ship->getJediFactor() / 100;
+        $jediHeroProbability = $this->jediFactor / 100;
 
         return random_int(1, 100) <= ($jediHeroProbability*100);
     }

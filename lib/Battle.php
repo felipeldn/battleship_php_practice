@@ -13,18 +13,21 @@ class Battle
         $ship2UsedJediPowers = false;
         while ($ship1Health > 0 && $ship2Health > 0) {
             // first, see if we have a rare Jedi hero event!
-            if (Ship:: canShipUseTheForce($ship1)) {
+            if ($ship1->canShipUseTheForce()) {
                 $ship1->useJediForce($ship2, $ship2Quantity);
 
             }
-            if (Ship:: canShipUseTheForce($ship2)) {
+            if ($ship2->canShipUseTheForce()) {
                 $ship2->useJediForce($ship1, $ship1Quantity);
 
             }
 
             // now battle them normally
-            $ship1Health = Ship:: damage($ship2, $ship2Quantity);
-            $ship2Health = Ship:: damage($ship1, $ship1Quantity);
+            $ship1->damage($ship2, $ship1Quantity);
+            $ship2->damage($ship1, $ship2Quantity);
+
+            $ship1Health = $ship1->getHealth($ship1Quantity);
+            $ship2Health = $ship2->getHealth($ship2Quantity);
         }
 
         if ($ship1Health <= 0 && $ship2Health <= 0) {
