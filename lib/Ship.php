@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 class Ship
 {
+    private int $id;
+
     private string $name;
 
     private int $weaponPower = 0;
@@ -14,8 +16,9 @@ class Ship
 
     private bool $underRepair;
 
-    public function __construct($name)
+    public function __construct(int $id, string $name)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->underRepair = mt_rand(1, 100) < 30;
     }
@@ -92,8 +95,9 @@ class Ship
         $this->jediFactor = $jediFactor;
     }
 
-//    public function addDamage(int $damage): void
-//    {
-//        $this->damage += $damage;
-//    }
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 }

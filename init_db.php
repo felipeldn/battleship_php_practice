@@ -5,7 +5,7 @@
  */
 $databaseName = 'oo_battle';
 $databaseUser = 'root';
-$databasePassword = '';
+$databasePassword = 'admin';
 
 /*
  * CREATE THE DATABASE

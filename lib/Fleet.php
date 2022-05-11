@@ -37,7 +37,6 @@ class Fleet
 
     public function damage(Fleet $enemyFleet): void
     {
-//        $enemyFleet->ship->addDamage($this->ship->getWeaponPower() * $this->numberOfShips);
         $enemyFleet->damage += $this->ship->getWeaponPower() * $this->numberOfShips;
     }
 
@@ -55,7 +54,6 @@ class Fleet
         }
 
         $enemyFleet->damage += $enemyFleet->ship->getStrength() * $enemyFleet->numberOfShips;
-//        $enemyFleet->damage($enemyFleet);
         $this->jediForceWasUsed = true;
     }
 
