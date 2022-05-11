@@ -1,10 +1,12 @@
 <?php
-require_once __DIR__.'/functions.php';
+require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__.'/lib/Ship.php';
+require_once __DIR__.'/lib/RebelShip.php';
 require_once __DIR__.'/lib/Service/Ships.php';
 require_once __DIR__.'/lib/Service/ShipLoader.php';
 
-$shipLoader = new ShipLoader();
+$container = new Container($configuration);
+$shipLoader = $container->getShipLoader();
 $ships = $shipLoader->load()->getShips();
 
 $errorMessage = '';

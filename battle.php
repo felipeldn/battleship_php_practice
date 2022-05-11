@@ -1,15 +1,17 @@
 <?php
 
-require_once __DIR__.'/functions.php';
+require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__.'/lib/Battle.php';
 require_once __DIR__ .'/lib/BattleDecider.php';
 require_once __DIR__.'/lib/Fleet.php';
 require_once __DIR__.'/lib/Outcome.php';
 require_once __DIR__.'/lib/Ship.php';
+require_once __DIR__.'/lib/RebelShip.php';
 require_once __DIR__.'/lib/Service/ShipLoader.php';
 require_once __DIR__.'/lib/Service/Ships.php';
 
-$shipLoader = new ShipLoader();
+$container = new Container($configuration);
+$shipLoader = $container->getShipLoader();
 $ships = $shipLoader->load()->getShips();
 
 $ship1Id = isset($_POST['ship1_id']) ? $_POST['ship1_id'] : null;
@@ -38,7 +40,7 @@ if ($ship1Quantity <= 0 || $ship2Quantity <= 0) {
 $fleet1 = new Fleet($ship1, $ship1Quantity);
 $fleet2 = new Fleet($ship2, $ship2Quantity);
 
-$battle = new Battle(new BattleDecider());
+$battle = $container->getBattle();
 
 $outcome = $battle->fight($fleet1, $fleet2);
 ?>

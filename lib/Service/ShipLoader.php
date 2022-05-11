@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 class ShipLoader
 {
+    private PDO $pdo;
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
     public function load(): Ships
     {
         $shipsData = $this->queryForShips();
@@ -23,8 +30,7 @@ class ShipLoader
 
     public function findOneById(int $id): ?Ship
     {
-        $pdo = new PDO('mysql:host=localhost;dbname=oo_battle', 'root', 'admin');
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = $this->getPDO();
         $statement = $pdo->prepare('SELECT * FROM ship WHERE id = :id');
         $statement->execute(array('id' => $id));
 
@@ -46,11 +52,15 @@ class ShipLoader
 
     private function queryForShips()
     {
-        $pdo = new PDO('mysql:host=localhost;dbname=oo_battle', 'root', 'admin');
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = $this->getPDO();
         $statement = $pdo->prepare('SELECT * FROM ship');
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    private function getPDO(): PDO
+    {
+        return $this->pdo;
     }
 }
