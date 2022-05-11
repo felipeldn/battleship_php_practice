@@ -1,5 +1,6 @@
 <?php
-require __DIR__.'/functions.php';
+require_once __DIR__.'/functions.php';
+require_once __DIR__.'/lib/Ship.php';
 
 $ships = get_ships();
 
@@ -95,9 +96,9 @@ if (isset($_GET['error'])) {
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
-                        <br>
+                        <br/>
                         <p class="text-center">AGAINST</p>
-                        <br>
+                        <br/>
                         <input class="center-block form-control text-field" type="text" name="ship2_quantity" placeholder="Enter Number of Ships" />
                         <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="ship2_name">
                             <option value="">Choose a Ship</option>
@@ -107,7 +108,7 @@ if (isset($_GET['error'])) {
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
-                        <br>
+                        <br/>
                         <button class="btn btn-md btn-danger center-block" type="submit">Engage</button>
                     </form>
                 </div>

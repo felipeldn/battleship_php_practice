@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class Ship
 {
     private string $name;
@@ -12,48 +14,33 @@ class Ship
 
     private bool $underRepair;
 
-    private int $damage;
-
-    private bool $jediForceWasUsed;
-
     public function __construct($name)
     {
         $this->name = $name;
-        $this->damage = 0;
-        $this->jediForceWasUsed = false;
         $this->underRepair = mt_rand(1, 100) < 30;
     }
 
-    public function isFunctional()
+    public function isFunctional(): bool
     {
         return !$this->underRepair;
     }
 
-    public function sayHello()
-    {
-        echo 'Hello!';
-    }
-
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setStrength($number)
+    public function setStrength(int $number): void
     {
-        if (!is_numeric($number)) {
-            throw new \Exception('Invalid strength passed '.$number);
-        }
-
         $this->strength = $number;
     }
 
-    public function getStrength()
+    public function getStrength(): int
     {
         return $this->strength;
     }
 
-    public function getNameAndSpecs($useShortFormat = false)
+    public function getNameAndSpecs($useShortFormat = false): string
     {
         if ($useShortFormat) {
             return sprintf(
@@ -63,76 +50,50 @@ class Ship
                 $this->jediFactor,
                 $this->strength
             );
-        } else {
-            return sprintf(
-                '%s: w:%s, j:%s, s:%s',
-                $this->name,
-                $this->weaponPower,
-                $this->jediFactor,
-                $this->strength
-            );
         }
+
+        return sprintf(
+            '%s: w:%s, j:%s, s:%s',
+            $this->name,
+            $this->weaponPower,
+            $this->jediFactor,
+            $this->strength
+        );
+
     }
 
-    public function doesGivenShipHaveMoreStrength($givenShip)
+    public function doesGivenShipHaveMoreStrength($givenShip): bool
     {
         return $givenShip->strength > $this->strength;
     }
 
-    public function getWeaponPower()
+    public function getWeaponPower(): int
     {
         return $this->weaponPower;
     }
 
-    public function getJediFactor()
+    public function getJediFactor(): int
     {
         return $this->jediFactor;
     }
 
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    public function setWeaponPower($weaponPower)
+    public function setWeaponPower(int $weaponPower): void
     {
         $this->weaponPower = $weaponPower;
     }
 
-    public function setJediFactor($jediFactor)
+    public function setJediFactor(int $jediFactor): void
     {
         $this->jediFactor = $jediFactor;
     }
 
-    public function getHealth($shipQuantity)
-    {
-        return $this->strength * $shipQuantity - $this->damage;
-    }
-
-    public function damage(Ship $enemy, $shipQuantity)
-    {
-        $enemy->damage += $this->weaponPower * $shipQuantity;
-    }
-
-    public function canShipUseTheForce(): bool
-    {
-        $jediHeroProbability = $this->jediFactor / 100;
-
-        return random_int(1, 100) <= ($jediHeroProbability*100);
-    }
-
-    public function useJediForce(Ship $enemy, int $enemyQuantity): void
-    {
-        if (!$this->canShipUseTheForce()) {
-            return;
-        }
-
-        $enemy->damage += $enemy->strength * $enemyQuantity;
-        $this->jediForceWasUsed = true;
-    }
-
-    public function wasJediForceUsed(): bool
-    {
-        return $this->jediForceWasUsed;
-    }
+//    public function addDamage(int $damage): void
+//    {
+//        $this->damage += $damage;
+//    }
 }

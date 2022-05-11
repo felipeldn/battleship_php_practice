@@ -1,54 +1,33 @@
 <?php
+
 declare(strict_types=1);
 
 class Battle
 {
+    private BattleDecider $battleOutcome;
 
-    public function fight(Ship $ship1, $ship1Quantity, Ship $ship2, $ship2Quantity)
+    public function __construct(BattleDecider $battleOutcome)
     {
-        $ship1Health = $ship1->getHealth($ship1Quantity);
-        $ship2Health = $ship2->getHealth($ship2Quantity);
+        $this->battleOutcome = $battleOutcome;
+    }
 
-        $ship1UsedJediPowers = false;
-        $ship2UsedJediPowers = false;
-        while ($ship1Health > 0 && $ship2Health > 0) {
+    public function fight(Fleet $fleet1, Fleet $fleet2): Outcome
+    {
+        $fleet1Health = $fleet1->getFleetHealth();
+        $fleet2Health = $fleet2->getFleetHealth();
+
+        while ($fleet1Health > 0 && $fleet2Health > 0) {
             // first, see if we have a rare Jedi hero event!
-            if ($ship1->canShipUseTheForce()) {
-                $ship1->useJediForce($ship2, $ship2Quantity);
-
-            }
-            if ($ship2->canShipUseTheForce()) {
-                $ship2->useJediForce($ship1, $ship1Quantity);
-
-            }
+            $fleet1->useJediForce($fleet2);
+            $fleet2->useJediForce($fleet1);
 
             // now battle them normally
-            $ship1->damage($ship2, $ship1Quantity);
-            $ship2->damage($ship1, $ship2Quantity);
+            $fleet1->damage($fleet2);
+            $fleet2->damage($fleet1);
 
-            $ship1Health = $ship1->getHealth($ship1Quantity);
-            $ship2Health = $ship2->getHealth($ship2Quantity);
+            $fleet1Health = $fleet1->getFleetHealth();
+            $fleet2Health = $fleet2->getFleetHealth();
         }
-
-        if ($ship1Health <= 0 && $ship2Health <= 0) {
-            // they destroyed each other
-            $winningShip = null;
-            $losingShip = null;
-            $usedJediPowers = $ship1UsedJediPowers || $ship2UsedJediPowers;
-        } elseif ($ship1Health <= 0) {
-            $winningShip = $ship2;
-            $losingShip = $ship1;
-            $usedJediPowers = $ship2UsedJediPowers;
-        } else {
-            $winningShip = $ship1;
-            $losingShip = $ship2;
-            $usedJediPowers = $ship1UsedJediPowers;
-        }
-
-        return array(
-            'winning_ship' => $winningShip,
-            'losing_ship' => $losingShip,
-            'used_jedi_powers' => $usedJediPowers,
-        );
+        return $this->battleOutcome->outcome($fleet1, $fleet2);
     }
 }
