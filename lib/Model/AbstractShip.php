@@ -1,8 +1,7 @@
 <?php
-
 declare(strict_types=1);
 
-class Ship
+class AbstractShip
 {
     private int $id;
 
@@ -10,22 +9,14 @@ class Ship
 
     private int $weaponPower = 0;
 
-    private int $jediFactor = 0;
-
     private int $strength = 0;
 
-    private bool $underRepair;
+    private string $team;
 
     public function __construct(int $id, string $name)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->underRepair = mt_rand(1, 100) < 30;
-    }
-
-    public function isFunctional(): bool
-    {
-        return !$this->underRepair;
     }
 
     public function getName(): string
@@ -50,8 +41,8 @@ class Ship
                 '%s: %s/%s/%s',
                 $this->name,
                 $this->weaponPower,
-                $this->jediFactor,
-                $this->strength
+                $this->getJediFactor(),
+                $this->strength,
             );
         }
 
@@ -59,7 +50,7 @@ class Ship
             '%s: w:%s, j:%s, s:%s',
             $this->name,
             $this->weaponPower,
-            $this->jediFactor,
+            $this->getJediFactor(),
             $this->strength
         );
 
@@ -75,11 +66,6 @@ class Ship
         return $this->weaponPower;
     }
 
-    public function getJediFactor(): int
-    {
-        return $this->jediFactor;
-    }
-
     public function setName(string $name): void
     {
         $this->name = $name;
@@ -90,14 +76,18 @@ class Ship
         $this->weaponPower = $weaponPower;
     }
 
-    public function setJediFactor(int $jediFactor): void
-    {
-        $this->jediFactor = $jediFactor;
-    }
-
     public function getId(): int
     {
         return $this->id;
     }
 
+    public function getTeam(): string
+    {
+        return $this->team;
+    }
+
+    public function setTeam(string $team): void
+    {
+        $this->team = $team;
+    }
 }

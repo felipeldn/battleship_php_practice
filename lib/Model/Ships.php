@@ -10,7 +10,7 @@ class Ships
         $this->ships = [];
     }
 
-    public function add(Ship $ship): void
+    public function add(AbstractShip $ship): void
     {
         if (in_array($ship, $this->ships)) {
             return;

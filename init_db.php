@@ -38,19 +38,19 @@ $pdo->exec('CREATE TABLE `ship` (
  */
 $pdo->exec('INSERT INTO ship
     (name, weapon_power, jedi_factor, strength, team) VALUES
-    ("Jedi Starfighter", 5, 15, 30, "rebel")'
+    ("Jedi Starfighter", 5, 15, 30, "Rebel")'
 );
 $pdo->exec('INSERT INTO ship
     (name, weapon_power, jedi_factor, strength, team) VALUES
-    ("CloakShape Fighter", 2, 2, 70, "rebel")'
+    ("CloakShape Fighter", 2, 2, 70, "Rebel")'
 );
 $pdo->exec('INSERT INTO ship
     (name, weapon_power, jedi_factor, strength, team) VALUES
-    ("Super Star Destroyer", 70, 0, 500, "empire")'
+    ("Super Star Destroyer", 70, 0, 500, "Empire")'
 );
 $pdo->exec('INSERT INTO ship
     (name, weapon_power, jedi_factor, strength, team) VALUES
-    ("RZ-1 A-wing interceptor", 4, 4, 50, "empire")'
+    ("RZ-1 A-wing interceptor", 4, 4, 50, "Empire")'
 );
 
 echo "Ding!\n";

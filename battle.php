@@ -1,14 +1,15 @@
 <?php
 
 require_once __DIR__ . '/bootstrap.php';
-require_once __DIR__.'/lib/Battle.php';
-require_once __DIR__ .'/lib/BattleDecider.php';
-require_once __DIR__.'/lib/Fleet.php';
-require_once __DIR__.'/lib/Outcome.php';
-require_once __DIR__.'/lib/Ship.php';
-require_once __DIR__.'/lib/RebelShip.php';
+require_once __DIR__.'/lib/Service/Battle.php';
+require_once __DIR__ .'/lib/Model/BattleDecider.php';
+require_once __DIR__.'/lib/Model/Fleet.php';
+require_once __DIR__.'/lib/Service/Outcome.php';
+require_once __DIR__.'/lib/Model/AbstractShip.php';
+require_once __DIR__.'/lib/Model/Ship.php';
+require_once __DIR__.'/lib/Model/RebelShip.php';
 require_once __DIR__.'/lib/Service/ShipLoader.php';
-require_once __DIR__.'/lib/Service/Ships.php';
+require_once __DIR__.'/lib/Model/Ships.php';
 
 $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();

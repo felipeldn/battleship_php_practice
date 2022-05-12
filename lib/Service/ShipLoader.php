@@ -17,10 +17,16 @@ class ShipLoader
 
         $ships = new Ships();
         foreach ($shipsData as $shipData) {
-            $ship = new Ship((int) $shipData['id'], $shipData['name']);
+            if ($shipData['team'] == 'Rebel') {
+                $ship = new RebelShip((int) $shipData['id'], $shipData['name']);
+            } else {
+                $ship = new Ship((int) $shipData['id'], $shipData['name']);
+                $ship->setJediFactor((int) $shipData['jedi_factor']);
+            }
+
             $ship->setWeaponPower((int) $shipData['weapon_power']);
-            $ship->setJediFactor((int) $shipData['jedi_factor']);
             $ship->setStrength((int) $shipData['strength']);
+            $ship->setTeam((string) $shipData['team']);
 
             $ships->add($ship);
         }
@@ -46,6 +52,7 @@ class ShipLoader
         $ship->setWeaponPower((int) $shipData['weapon_power']);
         $ship->setJediFactor((int) $shipData['jedi_factor']);
         $ship->setStrength((int) $shipData['strength']);
+        $ship->setTeam((string) $shipData['team']);
 
         return $ship;
     }

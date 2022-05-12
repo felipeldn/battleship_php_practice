@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__ . '/bootstrap.php';
-require_once __DIR__.'/lib/Ship.php';
-require_once __DIR__.'/lib/RebelShip.php';
-require_once __DIR__.'/lib/Service/Ships.php';
+require_once __DIR__.'/lib/Model/AbstractShip.php';
+require_once __DIR__.'/lib/Model/Ship.php';
+require_once __DIR__.'/lib/Model/RebelShip.php';
+require_once __DIR__.'/lib/Model/Ships.php';
 require_once __DIR__.'/lib/Service/ShipLoader.php';
 
 $container = new Container($configuration);
@@ -67,6 +68,7 @@ if (isset($_GET['error'])) {
                         <th>Jedi Factor</th>
                         <th>Strength</th>
                         <th>Status</th>
+                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,6 +85,7 @@ if (isset($_GET['error'])) {
                                     <i class="fa fa-cloud"></i>
                                 <?php endif; ?>
                             </td>
+                            <td><?php echo $ship->getTeam();?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
