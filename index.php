@@ -3,12 +3,18 @@ require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__.'/lib/Model/AbstractShip.php';
 require_once __DIR__.'/lib/Model/Ship.php';
 require_once __DIR__.'/lib/Model/RebelShip.php';
+require_once __DIR__.'/lib/Model/BrokenShip.php';
 require_once __DIR__.'/lib/Model/Ships.php';
+require_once __DIR__.'/lib/Service/AbstractShipStorage.php';
 require_once __DIR__.'/lib/Service/ShipLoader.php';
+require_once __DIR__.'/lib/Service/JsonFileShipStorage.php';
 
 $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->load()->getShips();
+
+$brokenShip = new BrokenShip(8, 'Broken');
+$ships[] = $brokenShip;
 
 $errorMessage = '';
 if (isset($_GET['error'])) {

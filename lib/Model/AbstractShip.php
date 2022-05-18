@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-class AbstractShip
+abstract class AbstractShip
 {
     private int $id;
 
@@ -12,6 +13,10 @@ class AbstractShip
     private int $strength = 0;
 
     private string $team;
+
+    abstract public function getJediFactor(): int;
+
+    abstract public function isFunctional(): bool;
 
     public function __construct(int $id, string $name)
     {
@@ -54,11 +59,6 @@ class AbstractShip
             $this->strength
         );
 
-    }
-
-    public function doesGivenShipHaveMoreStrength($givenShip): bool
-    {
-        return $givenShip->strength > $this->strength;
     }
 
     public function getWeaponPower(): int

@@ -1,0 +1,12 @@
+{
+    "name": "felipe/start",
+    "require": {
+        "symfony/symfony": "^5.4"
+    },
+    "authors": [
+        {
+            "name": "Felipe Cruz",
+            "email": "felipeldn91@gmail.com"
+        }
+    ]
+}

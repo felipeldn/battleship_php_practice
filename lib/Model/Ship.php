@@ -15,14 +15,14 @@ class Ship extends AbstractShip
         $this->underRepair = mt_rand(1, 100) < 30;
     }
 
-    public function getJediFactor(): int
-    {
-        return $this->jediFactor;
-    }
-
     public function setJediFactor(int $jediFactor): void
     {
         $this->jediFactor = $jediFactor;
+    }
+
+    public function getJediFactor(): int
+    {
+        return $this->jediFactor;
     }
 
     public function isFunctional(): bool
